@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Segment 6: Economics</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: #0a0a0a;
+            color: #ffffff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 60px 40px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1400px;
+        }
+
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            margin-bottom: 80px;
+        }
+
+        .hero-label {
+            font-size: 14px;
+            color: #47bea7;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 24px;
+        }
+
+        .headline {
+            font-size: 56px;
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 24px;
+            line-height: 1.2;
+            letter-spacing: -0.5px;
+        }
+
+        .subheadline {
+            font-size: 24px;
+            color: #8a8a8a;
+            font-weight: 400;
+            line-height: 1.5;
+        }
+
+        /* Calculator Sections */
+        .calc-wrapper {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .calc-section {
+            background: #1a1a1a;
+            border-radius: 16px;
+            padding: 32px;
+            border: 1px solid #2a2a2a;
+            margin-bottom: 24px;
+        }
+
+        .calc-section-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: #47bea7;
+            margin-bottom: 24px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .calc-input-group {
+            margin-bottom: 24px;
+        }
+
+        .calc-input-label {
+            display: block;
+            font-size: 14px;
+            color: #b0b0b0;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        .calc-input-help {
+            display: block;
+            font-size: 12px;
+            color: #6a6a6a;
+            margin-top: 4px;
+            font-style: italic;
+        }
+
+        .calc-input {
+            width: 100%;
+            background: #0a0a0a;
+            border: 1px solid #2a2a2a;
+            border-radius: 8px;
+            padding: 12px 16px;
+            color: #ffffff;
+            font-size: 16px;
+            font-family: inherit;
+        }
+
+        .calc-input:focus {
+            outline: none;
+            border-color: #47bea7;
+        }
+
+        .calc-range {
+            width: 100%;
+            height: 6px;
+            -webkit-appearance: none;
+            appearance: none;
+            background: #2a2a2a;
+            border-radius: 3px;
+            outline: none;
+        }
+
+        .calc-range::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: #47bea7;
+            cursor: pointer;
+        }
+
+        .calc-range::-moz-range-thumb {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: #47bea7;
+            cursor: pointer;
+            border: none;
+        }
+
+        .calc-range-value {
+            display: inline-block;
+            background: #47bea7;
+            color: #0a0a0a;
+            padding: 4px 12px;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 600;
+            margin-left: 12px;
+        }
+
+        .calc-projection-box {
+            background: rgba(71, 190, 167, 0.1);
+            border: 2px solid #47bea7;
+            border-radius: 12px;
+            padding: 24px;
+            text-align: center;
+            margin-top: 8px;
+        }
+
+        .calc-projection-label {
+            font-size: 13px;
+            color: #8a8a8a;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+        }
+
+        .calc-projection-value {
+            font-size: 48px;
+            font-weight: 700;
+            color: #47bea7;
+            line-height: 1;
+        }
+
+        .calc-projection-sublabel {
+            font-size: 14px;
+            color: #b0b0b0;
+            margin-top: 8px;
+        }
+
+        .calc-fixed-cost {
+            background: #0a0a0a;
+            border: 1px solid #2a2a2a;
+            border-radius: 8px;
+            padding: 12px 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+
+        .calc-fixed-cost-label {
+            color: #8a8a8a;
+            font-size: 14px;
+        }
+
+        .calc-fixed-cost-value {
+            color: #ffffff;
+            font-size: 16px;
+            font-weight: 600;
+        }
+
+        .calc-results-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .calc-result-card {
+            background: #0a0a0a;
+            border-radius: 12px;
+            padding: 24px;
+            border: 1px solid #2a2a2a;
+            text-align: center;
+        }
+
+        .calc-result-label {
+            font-size: 13px;
+            color: #8a8a8a;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 12px;
+        }
+
+        .calc-result-value {
+            font-size: 36px;
+            font-weight: 700;
+            color: #ffffff;
+            line-height: 1;
+        }
+
+        .calc-result-value.calc-highlight {
+            color: #47bea7;
+        }
+
+        .calc-result-sublabel {
+            font-size: 12px;
+            color: #6a6a6a;
+            margin-top: 8px;
+        }
+
+        @media (max-width: 768px) {
+            .calc-results-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Hero -->
+        <div class="hero">
+            <div class="hero-label">The Economics</div>
+            <h1 class="headline">Calculate Your 5-Year Revenue</h1>
+            <p class="subheadline">See your growth potential with Network+</p>
+        </div>
+
+        <div class="calc-wrapper">
+            <!-- Patient Growth Projections -->
+            <div class="calc-section">
+                <h3 class="calc-section-title">Patient Growth Projections</h3>
+                
+                <div class="calc-input-group">
+                    <label class="calc-input-label">Initial Patients (Starting Number)</label>
+                    <input type="number" id="initialPatients" min="0" max="1000" value="100" step="10" class="calc-input">
+                    <span class="calc-input-help">How many patients are you starting with?</span>
+                </div>
+
+                <div class="calc-input-group">
+                    <label class="calc-input-label">
+                        Average Patient Retention (Years)
+                        <span class="calc-range-value" id="retentionValue">5.0</span>
+                    </label>
+                    <input type="range" id="retention" min="1" max="7" value="5" step="0.1" class="calc-range">
+                    <span class="calc-input-help">How long does the average patient stay?</span>
+                </div>
+
+                <div class="calc-input-group">
+                    <label class="calc-input-label">
+                        Average Referrals Per Patient
+                        <span class="calc-range-value" id="referralsValue">1.0</span>
+                    </label>
+                    <input type="range" id="referrals" min="0" max="7" value="1" step="0.1" class="calc-range">
+                    <span class="calc-input-help">How many people will each patient refer?</span>
+                </div>
+
+                <div class="calc-input-group">
+                    <label class="calc-input-label">
+                        Patients Gained Through Marketing (Per Month)
+                        <span class="calc-range-value" id="marketingValue">1</span>
+                    </label>
+                    <input type="range" id="marketing" min="0" max="50" value="1" step="1" class="calc-range">
+                    <span class="calc-input-help">How many new patients from marketing each month?</span>
+                </div>
+
+                <div class="calc-projection-box">
+                    <div class="calc-projection-label">Patients 5 Years From Now</div>
+                    <div class="calc-projection-value" id="fiveYearPatients">0</div>
+                    <div class="calc-projection-sublabel">Based on your growth inputs above</div>
+                </div>
+            </div>
+
+            <!-- Pricing -->
+            <div class="calc-section">
+                <h3 class="calc-section-title">Pricing</h3>
+                
+                <div class="calc-input-group">
+                    <label class="calc-input-label">Your Monthly Fee (Per Patient)</label>
+                    <input type="number" id="monthlyFee" min="179" max="500" value="250" step="5" class="calc-input">
+                    <span class="calc-input-help">What you charge each patient per month (minimum $179)</span>
+                </div>
+
+                <div style="margin-top: 24px;">
+                    <label class="calc-input-label" style="margin-bottom: 12px;">Fixed Costs (Per Patient)</label>
+                    
+                    <div class="calc-fixed-cost">
+                        <span class="calc-fixed-cost-label">BRITE Platform Fee</span>
+                        <span class="calc-fixed-cost-value">$124/mo</span>
+                    </div>
+
+                    <div class="calc-fixed-cost">
+                        <span class="calc-fixed-cost-label">Network+ Provider Fee</span>
+                        <span class="calc-fixed-cost-value">$55/mo</span>
+                    </div>
+
+                    <div class="calc-fixed-cost" style="background: rgba(71, 190, 167, 0.1); border-color: #47bea7;">
+                        <span class="calc-fixed-cost-label" style="color: #47bea7; font-weight: 600;">Total Cost Per Patient</span>
+                        <span class="calc-fixed-cost-value" style="color: #47bea7;">$179/mo</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Results -->
+            <div class="calc-section">
+                <h3 class="calc-section-title">Your 5-Year Revenue</h3>
+                
+                <div class="calc-results-grid">
+                    <div class="calc-result-card">
+                        <div class="calc-result-label">Gross Annual Revenue</div>
+                        <div class="calc-result-value" id="grossRevenue">$0</div>
+                        <div class="calc-result-sublabel">Total revenue (Year 5)</div>
+                    </div>
+
+                    <div class="calc-result-card">
+                        <div class="calc-result-label">Net Annual Revenue</div>
+                        <div class="calc-result-value calc-highlight" id="netRevenue">$0</div>
+                        <div class="calc-result-sublabel">After all costs (Year 5)</div>
+                    </div>
+
+                    <div class="calc-result-card">
+                        <div class="calc-result-label">Monthly Profit</div>
+                        <div class="calc-result-value" id="monthlyProfit">$0</div>
+                        <div class="calc-result-sublabel">Per month (Year 5)</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Calculator Constants
+        const BRITE_COST = 124;
+        const NETWORK_PLUS_COST = 55;
+        const TOTAL_COST = BRITE_COST + NETWORK_PLUS_COST; // $179
+
+        // Get all inputs
+        const calcInputs = {
+            initialPatients: document.getElementById('initialPatients'),
+            retention: document.getElementById('retention'),
+            referrals: document.getElementById('referrals'),
+            marketing: document.getElementById('marketing'),
+            monthlyFee: document.getElementById('monthlyFee')
+        };
+
+        // Update range value displays
+        calcInputs.retention.addEventListener('input', (e) => {
+            document.getElementById('retentionValue').textContent = parseFloat(e.target.value).toFixed(1);
+            calculateRevenue();
+        });
+
+        calcInputs.referrals.addEventListener('input', (e) => {
+            document.getElementById('referralsValue').textContent = parseFloat(e.target.value).toFixed(1);
+            calculateRevenue();
+        });
+
+        calcInputs.marketing.addEventListener('input', (e) => {
+            document.getElementById('marketingValue').textContent = e.target.value;
+            calculateRevenue();
+        });
+
+        calcInputs.initialPatients.addEventListener('input', calculateRevenue);
+        calcInputs.monthlyFee.addEventListener('input', calculateRevenue);
+
+        // Format currency
+        function formatCurrency(amount) {
+            return new Intl.NumberFormat('en-US', {
+                style: 'currency',
+                currency: 'USD',
+                maximumFractionDigits: 0
+            }).format(amount);
+        }
+
+        // Calculate patients at year 5 using Build-A-Practice formula
+        function calculateFiveYearPatients(initialPatients, retentionPeriod, referralsPerPatient, marketingPatients) {
+            const attritionRate = 1 / retentionPeriod;
+            const annualMarketingPatients = marketingPatients * 12;
+            
+            let existingPatients = [];
+            let marketing = [];
+            let referralsForYear = [];
+            let existingPatientsWithMR = [];
+            let lostPatients = [];
+            let lostReferrals = [];
+            let totalPatients = [];
+
+            // Calculate for years 0 through 5
+            for (let year = 0; year <= 5; year++) {
+                if (year === 0) {
+                    existingPatients.push(0);
+                    marketing.push(0);
+                    referralsForYear.push(0);
+                    existingPatientsWithMR.push(0);
+                    lostPatients.push(0);
+                    lostReferrals.push(0);
+                    totalPatients.push(initialPatients);
+                } else if (year === 1) {
+                    existingPatients.push(initialPatients);
+                    marketing.push(annualMarketingPatients);
+                    referralsForYear.push(
+                        totalPatients[year - 1] -
+                        marketing[year - 1] -
+                        (existingPatients[year - 1] - lostPatients[year - 1])
+                    );
+                    existingPatientsWithMR.push(existingPatients[year]);
+                    lostPatients.push(existingPatientsWithMR[year] * attritionRate);
+                    lostReferrals.push(referralsForYear[year] * attritionRate);
+                    totalPatients.push(
+                        existingPatientsWithMR[year] -
+                        lostPatients[year] +
+                        (marketing[year] + referralsForYear[year] - lostReferrals[year]) *
+                        referralsPerPatient
+                    );
+                } else if (year === 2) {
+                    existingPatients.push(
+                        existingPatients[year - 1] -
+                        existingPatients[year - 1] * attritionRate
+                    );
+                    marketing.push(annualMarketingPatients);
+                    
+                    let referrals =
+                        totalPatients[year - 1] -
+                        marketing[year - 1] -
+                        (existingPatients[year - 1] - lostPatients[year - 1]);
+                    
+                    referralsForYear.push(referrals > 0 ? referrals : 0);
+                    existingPatientsWithMR.push(
+                        existingPatients[year] + marketing[year] + referralsForYear[year]
+                    );
+                    lostPatients.push(existingPatientsWithMR[year] * attritionRate);
+                    lostReferrals.push(referralsForYear[year] * attritionRate);
+                    totalPatients.push(
+                        existingPatientsWithMR[year] -
+                        lostPatients[year] +
+                        (marketing[year] + referralsForYear[year] - lostReferrals[year]) *
+                        referralsPerPatient
+                    );
+                } else {
+                    existingPatients.push(
+                        existingPatients[year - 1] -
+                        existingPatients[year - 1] * attritionRate
+                    );
+                    marketing.push(annualMarketingPatients);
+                    referralsForYear.push(
+                        totalPatients[year - 1] -
+                        marketing[year - 1] -
+                        (existingPatients[year - 1] - lostPatients[year - 1]) -
+                        referralsForYear[year - 1]
+                    );
+                    existingPatientsWithMR.push(
+                        existingPatients[year] + marketing[year] + referralsForYear[year]
+                    );
+                    lostPatients.push(existingPatientsWithMR[year] * attritionRate);
+                    lostReferrals.push(referralsForYear[year] * attritionRate);
+                    totalPatients.push(
+                        existingPatientsWithMR[year] -
+                        lostPatients[year] +
+                        (marketing[year] + referralsForYear[year] - lostReferrals[year]) *
+                        referralsPerPatient
+                    );
+                }
+            }
+
+            return Math.round(totalPatients[5]);
+        }
+
+        // Main calculation function
+        function calculateRevenue() {
+            const initialPatients = parseInt(calcInputs.initialPatients.value) || 0;
+            const retentionPeriod = parseFloat(calcInputs.retention.value);
+            const referralsPerPatient = parseFloat(calcInputs.referrals.value);
+            const marketingPatients = parseInt(calcInputs.marketing.value);
+            const monthlyFee = parseFloat(calcInputs.monthlyFee.value);
+
+            // Calculate 5-year patient projection
+            const fiveYearPatients = calculateFiveYearPatients(
+                initialPatients,
+                retentionPeriod,
+                referralsPerPatient,
+                marketingPatients
+            );
+
+            // Calculate revenue metrics
+            const perPatientProfit = monthlyFee - TOTAL_COST;
+            const monthlyProfit = fiveYearPatients * perPatientProfit;
+            const grossRevenue = fiveYearPatients * monthlyFee * 12;
+            const totalCosts = fiveYearPatients * TOTAL_COST * 12;
+            const netRevenue = grossRevenue - totalCosts;
+
+            // Update displays
+            document.getElementById('fiveYearPatients').textContent = fiveYearPatients.toLocaleString();
+            document.getElementById('grossRevenue').textContent = formatCurrency(grossRevenue);
+            document.getElementById('netRevenue').textContent = formatCurrency(netRevenue);
+            document.getElementById('monthlyProfit').textContent = formatCurrency(monthlyProfit);
+        }
+
+        // Initial calculation
+        calculateRevenue();
+    </script>
+</body>
+</html>
